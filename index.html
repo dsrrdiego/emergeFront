@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMERGE CULTURAL</title>
+    <!-- <base href="front/"> -->
+    <!-- <base href="'.BASE_URL.'"> -->
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="icon" href="images/logo.webp">
+
+
+</head>
+
+<body id="body">
+    <header>
+        <img id="logo" class="logo" src="images/logo.webp" alt="logo">
+        <h1>EMerGE CUltURaL</h1>
+
+        <nav>
+            <ul id="menu" class="ocultar">
+                <li><a class="menuItm" id="noticias">Noticias</a></li>
+                <li><a class="menuItm" id="artistas">Artistas</a></li>
+                <li><a class="menuItm" id="contacto">Contacto</a></li>
+                <li><a class="menuItm" id="subir">Subir</a></li>
+                <!-- <li><a class="menuItm" id="subir"><span><img src="images/subir.png" id="imagenSubir" srcset=""></span></a></li> -->
+                <li><a class="menuItm" id="login">LogIn</a></li>
+            </ul>
+        </nav>
+        <button id="botonMenu"><img src="images/menu.png" alt="boton del Menu"></button>
+    </header>
+    <div id="ajaxDiv">
+        <h1>DIFUNDIENDO MUSICA INDEPENDIENTE</h1>
+        <div class="flecs">
+            <div id="discosDiv">
+
+            </div>
+            <div id="reproductor">
+                <div id="tapa">
+                    <h2 id="artista"></h2>
+                </div>
+                <h4 id="titulo"></h4>
+                <hr>
+                <div id="controles">
+                    <button class="botonReproductor" id="btnPlay">Play</button>
+                    <button class="botonReproductor" id="btnPrev">&lt&lt</button>
+                    <button class="botonReproductor" id="btnNext">&gt&gt</button>
+                    <button class="botonReproductor" id="btnVolMenos">-</button>
+                    <button class="botonReproductor" id="btnVolMas">+</button>
+
+                    <h5 id="vol">Vol</h5>
+                </div>
+                <hr>
+                <ul id="listaDeReproduccion"></ul>
+            </div>
+        </div>
+        <!-- <audio src="" id="rocola">
+            Problema con este audio!!
+        </audio> -->
+
+        <footer>
+            <h5>Emerge Cultural&copy. Difundiendo Musica Independiente.</h5>
+        </footer>
+        <div id="barra">
+            <div id="barraTexto" class="barraAnimar"></div>
+        </div>
+
+        <!-- login -->
+        <div id="loginDiv">
+
+            <form id="loginForm">
+                usuario<input type="text" name="nombre" value="uno">
+                clave<input type="password" name="clave" value="uno">
+                <input type="submit" value="entrar" id="entrarBtn">
+                <input type="submit" value="registrar" id="registrarBtn">
+
+            </form>
+            <input type="button" value="Cerrar sesion" id="cerrarBtn">
+        </div>
+
+</body>
+<script src="js/subir.js"></script>
+<script src="js/reproductor.js"></script>
+<script src="js/login.js"></script>
+<script src="js/renders/noticiasRender.js"></script>
+<script src="js/renders/artistasRender.js"></script>
+<script src="js/renders/contactoRender.js"></script>
+<script src="js/renders/subirRender.js"></script>
+<script src="js/menu.js"></script>
+
+</html>
