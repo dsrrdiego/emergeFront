@@ -1,21 +1,6 @@
 function login() {
 
-  // fetch(direccionApi + "/login") 
-  //   .then(response => {
-  //     if (!response.ok) {
-  //       throw new Error('La solicitud no fue exitosa');
-  //     }
-  //     return response.text(); // Convierte la respuesta a un objeto JSON
-  //   })
-  //   .then(respuesta => {
-  //     discosDiv.innerHTML+=respuesta;
 
-
-  //     loguearse(discosDiv);
-  //   })
-  //   .catch(error => {
-  //     console.error('Ocurrió un error:', error);
-  //   });
   document.querySelector('#entrarBtn').addEventListener('click', function (e) { solicitarAcceso(e, 'entrar') })
   document.querySelector('#registrarBtn').addEventListener('click', function (e) { solicitarAcceso(e, 'registrar') })
   document.querySelector('#cerrarBtn').addEventListener('click', function (e) { solicitarAcceso(e, 'cerrar') })
@@ -87,21 +72,21 @@ function solicitarAcceso(e, ruta) {
 
 
 function yaEstavaLogueado() {
-  fetch("../estaLogueado")
-    .then(response => response.text())
-    .then(data => {
-      if (data.trim() != "null") document.querySelector('#login').innerHTML = data.trim();
+  // fetch("../estaLogueado")
+  //   .then(response => response.text())
+  //   .then(data => {
+  //     if (data.trim() != "null") document.querySelector('#login').innerHTML = data.trim();
 
-      // }
-      // else if (data.trim() === 'cerrado') document.querySelector('#login').innerHTML = 'LogIn';
-      // else
-      // alert(data);
-      // cargarPagina('artistas')
-      // console.log(data);
+  //     // }
+  //     // else if (data.trim() === 'cerrado') document.querySelector('#login').innerHTML = 'LogIn';
+  //     // else
+  //     // alert(data);
+  //     // cargarPagina('artistas')
+  //     // console.log(data);
 
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+  //   })
+  //   .catch(error => {
+  //     console.error('Error:', error);
+  //   });
 
 }

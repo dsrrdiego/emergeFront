@@ -1,6 +1,6 @@
 
 "use strict";
-const direccionApi = "/emerge/";
+
 let albumEnRocola;
 // window.onload = (event) => {
   // window.addEventListener("popstate",(event)=>{

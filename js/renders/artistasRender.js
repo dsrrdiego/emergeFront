@@ -1,7 +1,7 @@
 function artistas(){
     discosDiv.innerHTML="";
     
-    fetch(direccionApi + "/cards") //traer los albums.
+    fetch(direccionApi + "/albums") //traer los albums.
       .then(response => {
         if (!response.ok) {
           throw new Error('La solicitud no fue exitosa');
@@ -9,11 +9,11 @@ function artistas(){
         return response.json(); // Convierte la respuesta a un objeto JSON
       })
       .then(albums => {
-
+        console.log(albums);
         for (let i = 0; i < albums.length; i++) {
           let album = albums[i];
           let string = "";
-          string += '<img src=' + direccionApi + 'API/images/discos/' + album.img + ' alt="' + album.titulo + '"></img>';
+          string += '<img src=' + direccionApi+'/recurso/'+album.img  + ' alt="' + album.titulo + '"></img>';
           string += '<h3>' + album.artista + '</h3>';
           string += '<h6>' + album.fecha + ' ' + album.titulo + '</h6>'
           string += '<p> ' + album.descripcion + '</p>';
