@@ -41,6 +41,7 @@ let albumEnRocola;
   
   
   cargarPagina("artistas");
-  cargarPagina("subir");
+  // cargarPagina("contacto");
+  // cargarPagina("subir");
 
-  yaEstavaLogueado();
+  // yaEstavaLogueado();

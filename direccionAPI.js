@@ -1,2 +1,1 @@
-const direccionApi = "http://localhost:8080";
-const direccionBd = "EmergeBd/images/"
+const direccionApi = "http://127.0.0.1:8080";
