@@ -54,8 +54,14 @@ class Subir {
                 }
                 console.log(form);
                 // alert("acordarse de descomentar abajo")
-
-                fetch(direccionApi + "/subir", {
+                let miUri=
+                encodeURIComponent(inputs[0].value)+"/"+
+                encodeURIComponent(inputs[1].value)+"/"+
+                encodeURIComponent(inputs[2].value)+"/"+
+                encodeURIComponent(inputs[3].value);
+                console.log(miUri);
+                
+                fetch(direccionApi + "/subir/"+miUri, {
                     method: 'POST',
                     mode: 'no-cors',
                     body: form,
@@ -140,11 +146,11 @@ class Subir {
             this.crearTabla(canciones);
         })
 
+        //imagen clik
         this.imagen.addEventListener('click', () => {
             let fila = document.createElement('input');
             fila.type = 'file';
             fila.accept = 'image/*';
-            console.log('entro');
             fila.addEventListener('input', () => {
                 // console.log(fila.files[0].name);
                 // const cargarla=new FileReader();
@@ -155,6 +161,7 @@ class Subir {
                 // }
                 const URLIm = URL.createObjectURL(fila.files[0]);
                 this.imagen.style.backgroundImage = 'url(' + URLIm + ')'
+                
 
             })
             fila.click();
