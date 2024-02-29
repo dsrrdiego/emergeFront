@@ -8,6 +8,7 @@ class Subir {
     descripcion;
     tabla;
     cancionesInput;
+    imagenURL;
     static instancia;
     static ini() {//singleton
         if (this.instancia == null) {
@@ -31,7 +32,7 @@ class Subir {
         this.cancionesInput = document.querySelector('#canciones')
 
         // click al boton subir
-        document.querySelector('#btnSubir').addEventListener('click', function (event) {
+        document.querySelector('#btnSubir').addEventListener('click',  (event)=> {
             event.preventDefault();
             let form = document.getElementById('subirForm');
             let inputs = form.querySelectorAll('input');
@@ -48,10 +49,15 @@ class Subir {
             if (valido) {
                 let filesTag = document.querySelector('#canciones');
                 const files = filesTag.files;
+
                 let form = new FormData();
                 for (let i = 0; i < files.length; i++) {
                     form.append('files', files[i]);
                 }
+                console.log(this.imagenURL);
+                
+                form.append('img', this.imagenURL);
+
                 console.log(form);
                 // alert("acordarse de descomentar abajo")
                 let miUri=
@@ -160,6 +166,7 @@ class Subir {
                 //     imagen.ndChild(ima);
                 // }
                 const URLIm = URL.createObjectURL(fila.files[0]);
+                this.imagenURL=fila.files[0];
                 this.imagen.style.backgroundImage = 'url(' + URLIm + ')'
                 
 
