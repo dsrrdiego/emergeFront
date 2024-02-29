@@ -13,6 +13,7 @@
     let TapaDisco = document.querySelector("#tapa");
     TapaDisco.addEventListener('click', botonPlay);
     let artista = document.querySelector("#artista");
+    
     let titulo = document.querySelector("#titulo");
     let listaDeReproduccion = document.querySelector("#listaDeReproduccion");
 
@@ -22,26 +23,30 @@
     // let inicializado = false;
 
     function cargarRocola(idAlbum, refresh) {
-        fetch(direccionApi + 'canciones/' + idAlbum)
+        fetch(direccionApi + '/canciones/' + idAlbum)
             .then(response => {
                 return response.json();
             })
             .then(respuesta => {
+
                 canciones = respuesta;
 
                 if (!refresh) temaNro = 0;
                 discoSonando = idAlbum;
                 item = [];
                 listaDeReproduccion.innerHTML = "";
+                let tapaSrc= encodeURIComponent(albumEnRocola.artista)+"/"+
+                    encodeURIComponent(albumEnRocola.titulo)+"/"+
+                    encodeURIComponent(albumEnRocola.img);
                 TapaDisco.setAttribute("style", "background-image: " +
-                    "url(" + direccionApi + "API/images/discos/" + albumEnRocola.img + ")");
+                    "url(" + direccionApi + "/dameImagen/" + tapaSrc+ ")");
 
 
                 artista.innerHTML = albumEnRocola.artista;
                 for (let x = 0; x < canciones.length; x++) {
                     item[x] = document.createElement("li");
                     item[x].addEventListener("click", () => clickTema(x));
-                    item[x].innerText = canciones[x].nombre;
+                    item[x].innerText = canciones[x].titulo;
                     listaDeReproduccion.append(item[x]);
                 }
                 if (!refresh) clickTema(0);
@@ -98,14 +103,20 @@
 
     function seleccionarTema(t) {
 
-        let tit = albumEnRocola.artista + " | " + canciones[t].nombre;
+        let tit = albumEnRocola.artista + " | " + canciones[t].titulo;
         titulo.innerHTML = tit;
         if (audioTag) {
             audioTag.pause();
             audioTag.remove();
         }
         audioTag = document.createElement('audio');
-        audioTag.src = direccionApi + "API/audios/" + artista.innerHTML + "/" + canciones[t].direccion;
+        let audioSrc=encodeURIComponent(albumEnRocola.artista)+"/"+
+            encodeURIComponent(albumEnRocola.titulo)+"/"+
+            encodeURIComponent(canciones[t].titulo);
+        
+
+        audioTag.src = direccionApi + "/dameCancion/"+audioSrc;
+       
         audioTag.addEventListener('ended', () => next(1));
 
         borrarMarcado();

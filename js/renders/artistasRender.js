@@ -9,13 +9,17 @@ function artistas(){
         return response.json(); // Convierte la respuesta a un objeto JSON
       })
       .then(albums => {
-        console.log("los albums son: ",albums);
         for (let i = 0; i < albums.length; i++) {
           let album = albums[i];
           let string = "";
-          string += '<img src=' + direccionApi+'/dameImagen/'+album.img  + ' alt="' + album.titulo + '"></img>';
-          string += '<h3>' + album.artista + '</h3>';
-          string += '<h6>' + album.fecha + ' ' + album.titulo + '</h6>'
+          let imgSrc=encodeURIComponent(album.artista)+'/'
+          +encodeURIComponent(album.titulo)+'/'
+          +encodeURIComponent(album.img);
+
+          string += '<img src=' + direccionApi+'/dameImagen/'+imgSrc  + ' alt="' + album.titulo + '"></img>';
+          
+          string += '<h3>' + album.titulo + '</h3>';
+          string += '<h6>' + album.fecha + ' ' + album.artista + '</h6>'
           string += '<p> ' + album.descripcion + '</p>';
 
           let card = document.createElement('article');
@@ -25,8 +29,8 @@ function artistas(){
           card.innerHTML += string;
           discosDiv.appendChild(card);
         }
-        // albumEnRocola = albums[0];
-        // cargarRocola(1, false);
+        albumEnRocola = albums[0];
+        cargarRocola(1, false);
       })
       .catch(error => {
         console.error('Ocurrió un error:', error);
