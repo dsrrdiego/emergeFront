@@ -46,7 +46,8 @@ class Subir {
         })
 
         // click al boton subir
-        document.querySelector('#btnSubir').addEventListener('click', (event) => {
+        let botonSubir= document.querySelector('#btnSubir')
+        botonSubir.addEventListener('click', (event) => {
             event.preventDefault();
             let form = document.getElementById('subirForm');
             let inputs = form.querySelectorAll('input');
@@ -138,7 +139,10 @@ class Subir {
         this.albumSelect.addEventListener('input', () => {
             if (this.albumSelect.value == 'Nuevo') {
                 albumInput.style.display = "block";
+                botonSubir.style.display="block";
+
             } else {
+                botonSubir.style.display="none";
                 albumInput.style.display = "none";
                 albumInput.value = this.value;
                 console.log(albumInput.innerHTML);
