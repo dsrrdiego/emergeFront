@@ -140,6 +140,8 @@ class Subir {
             if (this.albumSelect.value == 'Nuevo') {
                 albumInput.style.display = "block";
                 botonSubir.style.display="block";
+                this.imagen.setAttribute("style", "background-image: ");
+                this.cargarAlbum();
 
             } else {
                 botonSubir.style.display="none";
