@@ -26,8 +26,6 @@ class Subir {
         this.fechaInput = document.querySelector('#fechaInput');
         this.descripcion = document.querySelector('#descripcion');
         this.artistaInput = document.querySelector('#artistaInput');
-        this.albumSelect = document.querySelector('#albumSelect')
-        this.artistaSelect = document.querySelector('#artista')
         this.tabla = document.querySelector('#tabla')
         this.cancionesInput = document.querySelector('#canciones')
 
@@ -100,53 +98,6 @@ class Subir {
             }
         })
 
-        // cuando cambia el input artista
-        this.artistaSelect.addEventListener('input', function () {
-            fetch(direccionApi + "/albumXArtista/" + this.value)
-                .then(response => response.json())
-                .then(data => {
-                    let i = 0;
-                    data.forEach(album => {
-                        let option = document.createElement('option');
-                        option.innerHTML = album.titulo;
-                        albumSelect.appendChild(option);
-                        fechaInput.value = album.fecha;
-                        i++;
-
-                        // mapeoAlbumId[album.titulo] = i;
-                        mapeoAlbumId[album.titulo] = album.id;
-
-                    });
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            // console.log(this.value);
-
-
-            if (this.value == 'Nuevo') {
-                artistaInput.style.display = "block";
-            } else {
-                artistaInput.style.display = "none";
-                artistaInput.value = this.value;
-            }
-            // console.log(this.value);
-
-        });
-
-        // cuando cambia el Input Album
-        this.albumSelect.addEventListener('input', () => {
-            if (this.albumSelect.value == 'Nuevo') {
-                albumInput.style.display = "block";
-            } else {
-                albumInput.style.display = "none";
-                albumInput.value = this.value;
-                console.log(albumInput.innerHTML);
-
-                this.cargarAlbum(mapeoAlbumId[this.albumSelect.value]);
-                // this.cargarAlbum(this.albumSelect.value);
-            }
-        })
 
         //boton Elegir archivos
         this.cancionesInput.addEventListener('input', () => {
@@ -201,69 +152,6 @@ class Subir {
 
 
 
-    cargarAlbum(albumId) {
-        console.log(albumId);
-        fetch(direccionApi + '/dameAlbumXId/' + albumId)
-            .then(respuesta => { return respuesta.json() })
-            .then(respuesta => {
-                let src = encodeURIComponent(respuesta.artista.nombre) + "/" +
-                    encodeURIComponent(respuesta.titulo) + "/" +
-                    encodeURIComponent(respuesta.img);
-                // console.log(respuesta);
-                // console.log(src);
-
-                this.imagen.setAttribute("style", "background-image: " +
-                    "url(" + direccionApi + "/dameImagen/" + src + ")");
-                this.imagenURL= direccionApi + "/dameImagen/" + src;
-                // fetch(direccionApi+"/dameImagen/"+src)
-                //     .then(response => response.blob())
-                //     .then(blob => {
-                //         // Crear una URL de objeto para el objeto Blob
-                //         const imageUrlObject = URL.createObjectURL(blob);
-
-                //         // Asignar la URL de objeto al elemento input
-                //         // const inputElement = document.getElementById('fileInput');
-                //         this.imgInput.src= imageUrlObject;
-                //     })
-                //     .catch(error => console.error('Error al cargar la imagen:', error));
-
-
-
-                this.fechaInput.innerHTML = respuesta.fecha;
-                this.descripcion.value = respuesta.descripcion;
-
-
-            })
-        fetch(direccionApi + '/canciones/' + albumId)
-            .then(response => {
-                return response.json();
-            })
-            .then(respuesta => {
-                // canciones = respuesta;
-                console.log(respuesta);
-                this.crearTabla(respuesta);
-
-                // albumEnRocola = albumId;
-                // cargarRocola(1, false);
-                // if (!refresh) temaNro = 0;
-                // discoSonando = idAlbum;
-                // item = [];
-                // listaDeReproduccion.innerHTML = "";
-
-
-                // artista.innerHTML = albumEnRocola.artista;
-                // for (let x = 0; x < canciones.length; x++) {
-                //     item[x] = document.createElement("li");
-                //     item[x].addEventListener("click", () => clickTema(x));
-                //     item[x].innerText = canciones[x].nombre;
-                //     listaDeReproduccion.append(item[x]);
-                // }
-                // if (!refresh) clickTema(0);
-                // item[temaNro].classList.add("cancionClick");
-                // if (refresh) play();
-                // window.scrollTo(0, 0);
-            });
-    }
     crearTabla(canciones) {
         //crear encabezado y borrar
         this.tabla.innerHTML = "";
