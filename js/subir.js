@@ -31,8 +31,22 @@ class Subir {
         this.tabla = document.querySelector('#tabla')
         this.cancionesInput = document.querySelector('#canciones')
 
+
+        // input file
+        let imgInput = document.createElement('input');
+        imgInput.type = 'file';
+        imgInput.accept = 'image/*';
+        imgInput.addEventListener('input', () => {
+
+            const URLIm = URL.createObjectURL(imgInput.files[0]);
+            this.imagenURL = imgInput.files[0];
+            this.imagen.style.backgroundImage = 'url(' + URLIm + ')'
+
+
+        })
+
         // click al boton subir
-        document.querySelector('#btnSubir').addEventListener('click',  (event)=> {
+        document.querySelector('#btnSubir').addEventListener('click', (event) => {
             event.preventDefault();
             let form = document.getElementById('subirForm');
             let inputs = form.querySelectorAll('input');
@@ -54,20 +68,20 @@ class Subir {
                 for (let i = 0; i < files.length; i++) {
                     form.append('files', files[i]);
                 }
+                // this.imagenURL= (typeof this.imagenURL !== 'undefined')? this.imagenURL : null;
                 console.log(this.imagenURL);
-                
                 form.append('img', this.imagenURL);
 
                 console.log(form);
                 // alert("acordarse de descomentar abajo")
-                let miUri=
-                encodeURIComponent(inputs[0].value)+"/"+
-                encodeURIComponent(inputs[1].value)+"/"+
-                encodeURIComponent(inputs[2].value)+"/"+
-                encodeURIComponent(inputs[3].value);
+                let miUri =
+                    encodeURIComponent(inputs[0].value) + "/" +
+                    encodeURIComponent(inputs[1].value) + "/" +
+                    encodeURIComponent(inputs[2].value) + "/" +
+                    encodeURIComponent(inputs[3].value);
                 console.log(miUri);
-                
-                fetch(direccionApi + "/subir/"+miUri, {
+
+                fetch(direccionApi + "/subir/" + miUri, {
                     method: 'POST',
                     mode: 'no-cors',
                     body: form,
@@ -154,24 +168,9 @@ class Subir {
 
         //imagen clik
         this.imagen.addEventListener('click', () => {
-            let fila = document.createElement('input');
-            fila.type = 'file';
-            fila.accept = 'image/*';
-            fila.addEventListener('input', () => {
-                // console.log(fila.files[0].name);
-                // const cargarla=new FileReader();
-                // cargarla.onload=()=>{
-                //     const ima=new Image();
-                //     ima.src=fila.files[0];
-                //     imagen.ndChild(ima);
-                // }
-                const URLIm = URL.createObjectURL(fila.files[0]);
-                this.imagenURL=fila.files[0];
-                this.imagen.style.backgroundImage = 'url(' + URLIm + ')'
-                
 
-            })
-            fila.click();
+
+            imgInput.click();
 
         })
 
@@ -212,8 +211,24 @@ class Subir {
                     encodeURIComponent(respuesta.img);
                 // console.log(respuesta);
                 // console.log(src);
+
                 this.imagen.setAttribute("style", "background-image: " +
                     "url(" + direccionApi + "/dameImagen/" + src + ")");
+                this.imagenURL= direccionApi + "/dameImagen/" + src;
+                // fetch(direccionApi+"/dameImagen/"+src)
+                //     .then(response => response.blob())
+                //     .then(blob => {
+                //         // Crear una URL de objeto para el objeto Blob
+                //         const imageUrlObject = URL.createObjectURL(blob);
+
+                //         // Asignar la URL de objeto al elemento input
+                //         // const inputElement = document.getElementById('fileInput');
+                //         this.imgInput.src= imageUrlObject;
+                //     })
+                //     .catch(error => console.error('Error al cargar la imagen:', error));
+
+
+
                 this.fechaInput.innerHTML = respuesta.fecha;
                 this.descripcion.value = respuesta.descripcion;
 
